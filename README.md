@@ -1,5 +1,5 @@
 # Cam Viewer
-View groups of images uploaded from an Internet Surveillance/Security Camera
+View groups of images uploaded from an Internet Surveillance/Security Camera in a meaningful way.
 
 ## Author
 [Steve Veerman](http://steve.veerman.ca/)
@@ -17,3 +17,10 @@ Cam Viewer will group images uploaded from an Internet camera by time (default g
 * Place index.php in the new directory
 * Visit your new directory in a web browser (eg. http://domain.com/camera_one/)
 * Click on an image to toggle group zoom in/out
+
+## Optional Setup
+### Schedule the deletion of images after 60 days
+* Copy the cronjobs file to server
+* Modify /home/www in cronjobs to be your web root path
+* On the command line, add this job to cron:
+** crontab cronjobs

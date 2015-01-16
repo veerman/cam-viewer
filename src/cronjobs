@@ -1,0 +1,5 @@
+# Remove old images (daily)
+0 0 * * * find /home/www -iname '*.jpg' -mtime +60 -delete
+
+# Remove empty directories under the current directory (daily)
+0 1 * * * find /home/www -type d -empty -delete

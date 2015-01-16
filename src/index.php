@@ -44,7 +44,7 @@ $groups = groupFilesByTime($files);
 			$(document).ready(function(){
 				$('.filegroup').click(function(){
 					if ($(this).find('img:first').attr('width') == 160)
-						$(this).find('img').attr('width','640');
+						$(this).find('img').removeAttr('width');
 					else
 						$(this).find('img').attr('width','160');
 				});

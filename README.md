@@ -20,7 +20,7 @@ Cam Viewer will group images uploaded from an Internet camera by time (default g
 
 ## Optional Setup
 ### Schedule the deletion of images after 60 days
+You may wish to delete images uploaded on a schedule to minimize storage.
 * Copy the cronjobs file to server
 * Modify /home/www in cronjobs to be your web root path
-* On the command line, add this job to cron:
-** crontab cronjobs
+* On the command line, add this job to cron: crontab cronjobs

@@ -2,16 +2,18 @@
 
 function glob_recursive($cwd = '*'){
 	$files = glob($cwd."*.{jpg,jpeg}", GLOB_BRACE);
+	arsort($files); // preliminary sort required for array_slice
+	$files = array_slice($files, 0, MAX);
 	$files = array_combine($files, array_map("filectime", $files));
 	$dirs = glob($cwd.'*', GLOB_ONLYDIR|GLOB_NOSORT);
 	//$dirs = array_combine($dirs, array_map("filectime", $dirs));
 	arsort($dirs);
 	foreach ($dirs as $dir){
 		$files = array_merge($files, glob_recursive($dir.'/'));
-		if (count($files) > 100)
+		if (count($files) > MAX)
 			break;
 	}
-	arsort($files);
+	arsort($files); // final files sort (newest first)
 	return $files;
 }
 
@@ -32,8 +34,9 @@ function groupFilesByTime($files){
 
 $search = isset($_GET['search']) ? '*'.$_GET['search'].'*' : '*';
 $max = isset($_GET['max']) ? intval($_GET['max']) : 100;
+define('MAX', $max);
 $files = glob_recursive($search);
-$files = array_slice($files, 0, $max);
+$files = array_slice($files, 0, MAX);
 $groups = groupFilesByTime($files);
 
 ?>

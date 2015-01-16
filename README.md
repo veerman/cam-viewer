@@ -5,7 +5,7 @@ View groups of images uploaded from an Internet Surveillance/Security Camera in 
 [Steve Veerman](http://steve.veerman.ca/)
 
 ## About
-Cam Viewer will group images uploaded from an Internet camera by time (default group is 30 seconds) and display them in reverse chronological order (newest first). Tested on Trendnet TV-IP551WI and Trendnet TV-IP572WI, but it should work with any Internet camera that has built-in ftp upload functionality.
+Cam Viewer will group images uploaded from an Internet camera by time (default group is 30 seconds) and display them in reverse chronological order (newest first). Tested on Trendnet TV-IP551WI, Trendnet TV-IP572WI, and D-Link DCS-825L, but it should also work with any Internet camera that has built-in ftp upload functionality.
 
 ## Requirements
 * PHP

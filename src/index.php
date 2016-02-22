@@ -13,7 +13,7 @@ if ($_POST['password'] == "mypassword"){
 ?>
 <html>
 	<head>
-		<script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+		<script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
 		<script>
 			var last_time = 0;
 
@@ -30,6 +30,9 @@ if ($_POST['password'] == "mypassword"){
 			}
 
 			function loadImages(){
+				$('#loadmore').prop('disabled', true);
+				$('#loadmore').val('Loading Images...');
+
 				var qs = getUrlVars();
 
 				$.getJSON('images.php?max=50&search=' + (qs['search'] !== undefined ? qs['search'] : '') + '&before=' + last_time, function(data){
@@ -48,6 +51,8 @@ if ($_POST['password'] == "mypassword"){
 						html.push('</p>');
 					});
 					$('#images').append(html.join(''));
+					$('#loadmore').removeAttr('disabled');
+					$('#loadmore').val('Load More');
 				});
 			}
 
@@ -58,6 +63,14 @@ if ($_POST['password'] == "mypassword"){
 					else
 						$(this).find('img').attr('width','160');
 				});
+
+				$(document).on('click', '#loadmore', function(){
+					loadImages();
+				});
+
+				if ($('#loadmore').length){
+					loadImages();
+				}
 			});
 		</script>
 	</head>
@@ -72,11 +85,6 @@ if ($_POST['password'] == "mypassword"){
 		<?php
 			}else{
 		?>
-			<script>
-				$(function(){
-					loadImages();
-				});				
-			</script>
 			<ul>
 				<?
 				foreach (getRootDirectories() as $dir){
@@ -87,7 +95,8 @@ if ($_POST['password'] == "mypassword"){
 				?>
 			</ul>
 			<div id="images"></div>
-			<input type="button" onclick="loadImages()" value="Load More" />
+			<br />
+			<input type="button" id="loadmore" value="Load More" style="width:260px;height:30px;" />
 		<?php
 			}
 		?>

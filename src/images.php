@@ -21,16 +21,20 @@ class camViewer{
 		return $files;
 	}
 
-	public function groupFilesByTime($files){
+	public function groupFilesByTime($files, $max){
 		$groups = array();
 		$last_time = 0;
 		$interval = 30; // 30 seconds between groups
+		$file_cnt = 0;
 		foreach ($files as $file => $time){
 			$difference = $prev_time - $time;
 			if (abs($difference) < $interval)
 				$groups[count($groups) - 1][$time] = $file;
-			else
+			else{
+				if ($file_cnt > $max)
+					break;
 				$groups[][$time] = $file;
+			}
 			$prev_time = $time;
 		}
 		return $groups;
@@ -74,9 +78,9 @@ if (!empty($before)){ // page results if necessary
 	if ($start === 0) // start not found, set as high number so array_slice returns empty
 		$start = 999999;
 }
-$files = array_slice($files, $start, MAX);
+$files = array_slice($files, $start, MAX*2);
 
-$groups = $camviewer->groupFilesByTime($files);
+$groups = $camviewer->groupFilesByTime($files, MAX);
 
 $camviewer->echoJSON($groups);
 
